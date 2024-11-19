@@ -41,5 +41,23 @@
     width: 100px; /* 로고 이미지 크기 조절 */
     height: auto;
   }
+
+  /* 로딩 화면을 위한 스타일 */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+/* 애니메이션: 로딩 화면의 페이드 인 */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
   
   

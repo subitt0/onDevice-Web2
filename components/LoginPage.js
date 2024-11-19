@@ -1,5 +1,9 @@
-import React from 'react';
+// src/components/LoginPage.js
+import React, { useState } from 'react';
+import { useAuth } from '../AuthContext'
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';  // 'Link' import 추가
+
 import '../styles/LoginPage.css';
 import '../styles/Basic.css';
 
@@ -8,8 +12,23 @@ import googleLogo from '../assets/images/google_logo.png';
 import kakaoLogo from '../assets/images/kakao_logo.png';
 import mainLogo from '../assets/images/mainLogo.png';
 
-
 function LoginPage() {
+  const [userInfo, setUserInfo] = useState({ email: '', password: '' });
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await login(userInfo.email, userInfo.password);
+      console.log('로그인 성공');
+      navigate('/main'); // 로그인 후 메인 페이지로 이동
+    } catch (error) {
+      console.error('로그인 실패: ', error.message);
+    }
+  };
+
   return (
     <div className="login-container">
       {/* 상단 헤더 영역 */}
@@ -30,9 +49,20 @@ function LoginPage() {
         </div>
 
 
-        <form className="login-form">
-          <input type="text" placeholder="아이디" className="input-field" />
-          <input type="password" placeholder="비밀번호" className="input-field" />
+        <form className="login-form" onSubmit={handleLoginSubmit}>
+          <input 
+          type="email" 
+          placeholder="E-mail" 
+          value={userInfo.email}
+          onChange={(e) => setUserInfo({...userInfo, email: e.target.value})}
+          className="input-field" />
+
+          <input 
+          type="password" 
+          placeholder="Password" 
+          value={userInfo.password}
+          onChange={(e) => setUserInfo({...userInfo, password: e.target.value})}
+          className="input-field" />
 
           <button type="submit" className="login-button">LOGIN</button>
           <Link to="/registerPage" className="register-button-link">

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { app } from '../firebase'; // firebase.js에서 app 초기화 객체 가져오기
 import '../styles/RegisterPage.css';
-import '../styles/Basic.css'
+import '../styles/Basic.css';
 
 function RegisterPage() {
   const [userInfo, setUserInfo] = useState({
@@ -10,11 +12,16 @@ function RegisterPage() {
     confirmPassword: '',
     name: '',
   });
+
   const [petInfo, setPetInfo] = useState({
     petName: '',
     petAge: '',
     specialNotes: '',
   });
+
+  const [error, setError] = useState('');
+  const navigate = useNavigate(); // useNavigate 훅을 사용하여 navigate 함수 얻기
+  const auth = getAuth(app); // Firebase auth 객체 가져오기
 
   const handleUserInfoChange = (e) => {
     const { name, value } = e.target;
@@ -32,16 +39,25 @@ function RegisterPage() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('User Info:', userInfo);
-    console.log('Pet Info:', petInfo);
+
+    if (userInfo.password !== userInfo.confirmPassword) {
+      setError('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+      return;
+    }
+
+    try {
+      await createUserWithEmailAndPassword(auth, userInfo.id, userInfo.password);
+      console.log('회원가입 성공');
+      navigate('/loginPage'); // 회원가입 후 로그인 페이지로 이동
+    } catch (error) {
+      setError('회원가입 실패: ' + error.message);
+    }
   };
 
   return (
-
     <div className="register-container">
-      {/* 상단 헤더 영역 */}
       <div className="header">
         <div className="header-logo">
           <a href="/main">ROBOBUDDY</a>
@@ -54,10 +70,13 @@ function RegisterPage() {
 
       <div className="register-container">
         <h1>회원 가입</h1>
-        <div className="header-row"> {/* 제목과 버튼을 가로로 배치하는 부분 */}
+        <div className="header-row">
           <p>사이트 이용에 필요한 정보들을 입력합니다.</p>
-          <button type="submit" className="submit-button">가입하기</button>
         </div>
+
+        {/* 오류 메시지 출력 */}
+        {error && <p className="error-message">{error}</p>}
+
         <form className="signup-form" onSubmit={handleSubmit}>
           <div className="form-container">
             {/* User Info Section */}
@@ -65,7 +84,7 @@ function RegisterPage() {
               <h3 className="section-title">유저 정보 입력</h3>
               <div className="input-group">
                 <label>
-                  아이디<span class="red-star">*</span>
+                  아이디<span className="red-star">*</span>
                   <input
                     type="text"
                     name="id"
@@ -78,7 +97,7 @@ function RegisterPage() {
               </div>
               <div className="input-group">
                 <label>
-                  비밀번호<span class="red-star">*</span>
+                  비밀번호<span className="red-star">*</span>
                   <input
                     type="password"
                     name="password"
@@ -91,7 +110,7 @@ function RegisterPage() {
               </div>
               <div className="input-group">
                 <label>
-                  비밀번호 확인<span class="red-star">*</span>
+                  비밀번호 확인<span className="red-star">*</span>
                   <input
                     type="password"
                     name="confirmPassword"
@@ -104,7 +123,7 @@ function RegisterPage() {
               </div>
               <div className="input-group">
                 <label>
-                  이름<span class="red-star">*</span>
+                  이름<span className="red-star">*</span>
                   <input
                     type="text"
                     name="name"
@@ -122,7 +141,7 @@ function RegisterPage() {
               <h3 className="section-title">반려견 정보 입력</h3>
               <div className="input-group">
                 <label>
-                  강아지 이름<span class="red-star">*</span>
+                  강아지 이름<span className="red-star">*</span>
                   <input
                     type="text"
                     name="petName"
@@ -135,7 +154,7 @@ function RegisterPage() {
               </div>
               <div className="input-group">
                 <label>
-                  나이<span class="red-star">*</span>
+                  나이<span className="red-star">*</span>
                   <input
                     type="text"
                     name="petAge"
@@ -159,6 +178,9 @@ function RegisterPage() {
               </div>
             </div>
           </div>
+
+          {/* submit 버튼을 form 안에 위치시킴 */}
+          <button type="submit" className="submit-button">가입하기</button>
         </form>
       </div>
     </div>
