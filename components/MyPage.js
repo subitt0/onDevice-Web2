@@ -13,7 +13,7 @@ function App() {
 
     const handleLogout = async () => {
         try {
-          await logout();
+          logout();
           navigate("/main");
           console.log('로그아웃 성공');
         } catch (error) {
@@ -22,7 +22,7 @@ function App() {
       };
 
     return (
-        <div class="mypage">
+        <div className="mypage">
             <div className="header">
                 <div className="header-logo">
                     <a href="/main">ROBOBUDDY</a>
