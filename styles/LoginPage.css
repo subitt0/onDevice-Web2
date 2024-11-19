@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Jaro&display=swap');
+
 /* 전체 레이아웃 */
 .login-container {
   display: flex;
@@ -14,7 +16,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 100px;
 }
 
 /* 로고 스타일 */
@@ -31,14 +33,13 @@
   align-items: center; /* 가로 중앙 정렬 */
 }
 
-.logo-image {
-  width: 100px; /* 로고 이미지 크기 조절 */
-  height: auto;
-}
-
-.logo-text {
+.login-logo-text {
   margin-top: 10px; /* 텍스트와 이미지 간의 간격 */
-  font-size: 24px; /* 텍스트 크기 조정 */
+  font-family: 'jaro';
+  color: #F1DCB7;
+  text-shadow: 0px 2px 2px rgba(53, 53, 53, 0.2);
+  letter-spacing: 1px; /* 글자 간격 조정 */
+  font-size: 30px; /* 텍스트 크기 조정 */
   font-weight: bold; /* 텍스트 굵기 */
 }
 
@@ -90,6 +91,16 @@
 .register-button-link {
   display: block; /* Link를 블록 요소로 변경 */
   width: 100%; /* 버튼이 부모 요소의 너비를 완전히 차지하도록 설정 */
+}
+
+.register-button:hover {
+  background-color: #dcdcdc;
+  color: #725D39;
+}
+
+.login-button:hover {
+  background-color: #cfb890;
+  color: #725D39;
 }
 
 

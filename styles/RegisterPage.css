@@ -29,8 +29,14 @@
     align-items: center;
     width: 100%;
     max-width: 600px;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
   }
+
+    .header-row p {
+    position: absolute; 
+    left: 300px; 
+    top : 98px;
+    }
   
   /* form container를 좌우로 나누기 위한 스타일 */
   .form-container {
@@ -85,6 +91,10 @@
     font-weight: bold;
     cursor: pointer;
     border-radius: 4px;
+    position: absolute; /* 위치 고정 */
+    right: 300px;
+    transition: box-shadow 0.3s ease;
+  
   }
   
   .submit-button:hover {
@@ -96,3 +106,6 @@
     width: 100px;
   }
   
+  .red-star {
+    color: red; /* 별표를 빨간색으로 설정 */
+  }
