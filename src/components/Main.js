@@ -1,4 +1,3 @@
-// src/components/Main.js
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
@@ -19,19 +18,6 @@ function Main() {
       setLoading(false); // 로그인하지 않아도 로딩 해제
     }
   }, [currentUser]); // currentUser가 변경될 때마다 실행
-
-  const handleLogout = async () => {
-    try {
-      setLoading(true); // 로딩 상태 활성화
-      await logout();
-      console.log('로그아웃 성공');
-      navigate('/'); // 로그아웃 후 메인 페이지로 이동
-    } catch (error) {
-      console.error('로그아웃 실패:', error.message);
-    } finally {
-      setLoading(false); // 로딩 상태 비활성화
-    }
-  };
 
   return (
     <div>

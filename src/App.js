@@ -10,6 +10,8 @@ import MyPage from './components/MyPage';
 import InfoPage from './components/InfoPage';
 import QuizPage from './components/QuizPage';
 
+import Test_chat from './components/test_chat'
+
 function App() {
   const { currentUser } = useAuth();  // 인증 상태 가져오기
 
@@ -23,7 +25,7 @@ function App() {
         <Route path="/main" element={<Main />} /> 
         <Route path="/loginPage" element={<LoginPage />} />
         <Route path="/registerPage" element={<RegisterPage />} />
-        <Route path="/chatbotPage" element={<ChatbotPage />} />
+        <Route path="/chatbotPage" element={<Test_chat />} />
         <Route path="/infoPage" element={<InfoPage />} />
         <Route path="/quizPage" element={<QuizPage />} />
 

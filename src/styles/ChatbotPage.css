@@ -1,9 +1,228 @@
 .chatbot {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: 100vh;
-    background-color: #ffffff;
-    font-family: Arial, sans-serif;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  background-color: #ffffff;
+  font-family: Arial, sans-serif;
+  overflow:hidden;
+}
+
+/* 좌측 사이드바 */
+.sidebar {
+  position: absolute;
+  width: 25%;
+  height: 100vh;
+  padding: 1vw;
+  margin-right: 73vw;
+  margin-top: 5vh;
+     /* 가운데 정렬 */
+   left: 5%; /* 부모 기준으로 왼쪽에서 시작 */
+   transform: translateX(-5%); /* 자신의 폭 절반만큼 왼쪽으로 이동 */
+
+}
+
+.sidebar h3 {
+  
+  color: #555;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #555;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.vertical-line {
+  border-left: 2px solid #ddd;
+  height: 80%;
+  position: absolute;
+
+  margin-left: 15vw;
+}
+
+/* 채팅부분 */
+.center-container {
+  position: absolute;
+  margin-top: 10vh;
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+
+  place-items: center;
+  /* 수직 및 수평 중앙 정렬 */
+  height:100%;
+
+}
+
+/* 로고와 안내 텍스트 */
+.intro-section {
+  position: absolute;
+  /* 고정 위치 설정 */
+  top: 40%;
+  /* 화면 위에서 20% 아래에 위치 */
+  left: 60%;
+  /* 수평 중앙 정렬 */
+  z-index: 1;
+  /* 메시지보다 아래에 배치 */
+
+  /* 가운데 정렬 */
+  left: 60%;
+  /* 부모 기준으로 왼쪽에서 시작 */
+  transform: translateX(-60%);
+  /* 자신의 폭 절반만큼 왼쪽으로 이동 */
+
+}
+
+.dog-icon {
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding-left: 4vw;
+
+}
+
+.description {
+  display:block;
+  font-size: 1.2rem;
+  color: #aaa;
+  margin-top: 1rem;
+  text-align: center;
+  padding-right: 5vw;
+
+
+}
+
+/* 입력부분 */
+.input-container {
+  position: absolute;
+  display: flex;
+  width: 80%;
+  height: 5vh;
+  max-width: 50vw;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 85vh;
+}
+
+.text-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #333;
+  width: 10vw;
+  height: 4vh;
+  padding-left: 1vw;
+  padding-top: 0.7vh;
+}
+
+.text-input::placeholder {
+  color: #aaa;
+}
+
+.button {
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+
+.mic-button:hover {
+  background-color:#ffffff;
+}
+.send-button:hover {
+  background-color:#ffffff;
+}
+
+
+.mic-button {
+  width: 23px;
+  height: auto;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding-left: 0px;
+}
+
+.send-button {
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+
+
+/*----------------------------------*/
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  /* 세로 방향으로 메시지 쌓기 */
+  gap: 10px;
+  /* 메시지 간격 */
+  padding: 10px;
+
+  position: absolute;
+  /* 메시지를 고정 위치로 설정 */
+  top: 0;
+  left: 0;
+  width: 90%;
+  height: 100%;
+  /* 채팅 메시지가 화면 전체를 차지 */
+  overflow-y: auto;
+  /* 메시지가 많아지면 스크롤 활성화 */
+  padding: 10px;
+  z-index: 2;
+  /* 로고 위로 메시지를 표시 */
+  pointer-events: none;
+  /* 채팅 컨테이너는 클릭 불가로 설정 */
+  /* 가운데 정렬 */
+  left: 50%;
+  /* 부모 기준으로 왼쪽에서 시작 */
+  transform: translateX(-50%);
+  /* 자신의 폭 절반만큼 왼쪽으로 이동 */
+}
+
+.user-msg {
+  align-self: flex-end;
+  /* 우측 정렬 */
+  background-color: #d1f7c4;
+  color: #333;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 60%;
+  /* 메시지 최대 너비 제한 */
+  word-wrap: break-word;
+  /* 길이가 길면 줄바꿈 */
+
+  pointer-events: auto;
+  /* 메시지 자체는 클릭 가능 */
+}
+
+.bot-msg {
+  align-self: flex-start;
+  /* 좌측 정렬 */
+  background-color: #f1f1f1;
+  color: #333;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 60%;
+  /* 메시지 최대 너비 제한 */
+  word-wrap: break-word;
+  /* 길이가 길면 줄바꿈 */
+  pointer-events: auto;
+  /* 메시지 자체는 클릭 가능 */
+}

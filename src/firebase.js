@@ -1,5 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'; // firebase/auth에서 가져오기
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -22,5 +24,10 @@ const app = initializeApp(firebaseConfig);
 // Firebase 인증 객체
 const auth = getAuth(app);
 
+// Firestore
+const db = getFirestore(app);
+
+const storage = getStorage(app); // Firebase Storage 인스턴스
+
 // export
-export { app, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword };
+export { app, auth, db, storage, createUserWithEmailAndPassword, signInWithEmailAndPassword };

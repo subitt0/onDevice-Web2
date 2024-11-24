@@ -1,9 +1,47 @@
 .mypage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: 100vh;
-    background-color: #ffffff;
-    font-family: Arial, sans-serif;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  background-color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+.mypage-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  /* 가로 방향 중앙 정렬 */
+  align-items: center;
+  /* 세로 방향 중앙 정렬 */
+  margin-bottom: 3.5vh;
+}
+
+.upload-button {
+  display: flex;
+  
+}
+
+.image-icon {
+  width: 20vw;
+  height: 20vw;
+  margin-top: 5vh;
+  border-radius: 100%;
+  /* 동그랗게 만들기 */
+  object-fit: cover;
+  /* 이미지가 동그라미 안에 맞게 크기 조정 */
+}
+
+.special note {
+  box-sizing: border-box;
+
+}
+
+.logout-button {
+  margin-top: 15vh;
+ 
+}
