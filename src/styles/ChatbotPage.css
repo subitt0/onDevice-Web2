@@ -17,11 +17,8 @@
   padding: 1vw;
   margin-right: 73vw;
   margin-top: 5vh;
-  /* 가운데 정렬 */
   left: 5%;
-  /* 부모 기준으로 왼쪽에서 시작 */
   transform: translateX(-5%);
-  /* 자신의 폭 절반만큼 왼쪽으로 이동 */
 
 }
 
@@ -37,7 +34,7 @@
   position: absolute;
   margin-left: 15vw;
   top: 3vh;
-  z-index: 2; /* 사이드바 위로 표시 */
+  z-index: 2;
   
 }
 
@@ -50,7 +47,6 @@
   flex-direction: column;
 
   place-items: center;
-  /* 수직 및 수평 중앙 정렬 */
   height: 100%;
 
 }
@@ -58,19 +54,11 @@
 /* 로고와 안내 텍스트 */
 .intro-section {
   position: absolute;
-  /* 고정 위치 설정 */
   top: 40%;
-  /* 화면 위에서 20% 아래에 위치 */
   left: 60%;
-  /* 수평 중앙 정렬 */
   z-index: 1;
-  /* 메시지보다 아래에 배치 */
-
-  /* 가운데 정렬 */
   left: 60%;
-  /* 부모 기준으로 왼쪽에서 시작 */
   transform: translateX(-60%);
-  /* 자신의 폭 절반만큼 왼쪽으로 이동 */
 
 }
 
@@ -164,67 +152,48 @@
 .chat-container {
   display: flex;
   flex-direction: column;
-  /* 세로 방향으로 메시지 쌓기 */
   gap: 10px;
-  /* 메시지 간격 */
   padding: 10px;
-
-
-  /* 메시지를 고정 위치로 설정 */
   top: 0;
   left: 0;
   width: 90%;
   height: 70%;
-  /* 채팅 메시지가 화면 전체를 차지 */
   overflow-y: scroll;
-  /* 메시지가 많아지면 스크롤 활성화 */
   padding: 10px;
   z-index: 2;
-  /* 로고 위로 메시지를 표시 */
-  /* 채팅 컨테이너는 클릭 불가로 설정 */
-  /* 가운데 정렬 */
+
 
 }
-
+/* 유저메세지 */
 .user-msg {
   align-self: flex-end;
-  /* 우측 정렬 */
   background-color: #d1f7c4;
   color: #333;
   padding: 10px;
   border-radius: 10px;
   max-width: 60%;
-  /* 메시지 최대 너비 제한 */
   word-wrap: break-word;
-  /* 길이가 길면 줄바꿈 */
-
   pointer-events: auto;
-  /* 메시지 자체는 클릭 가능 */
 }
 
+/* 챗봇메세지 */
 .bot-msg {
   align-self: flex-start;
-  /* 좌측 정렬 */
   background-color: #f1f1f1;
   color: #333;
   padding: 10px;
   border-radius: 10px;
   max-width: 60%;
-  /* 메시지 최대 너비 제한 */
   word-wrap: break-word;
-  /* 길이가 길면 줄바꿈 */
   pointer-events: auto;
-  /* 메시지 자체는 클릭 가능 */
 }
 
+/* 검색기록 */
 .history-item {
   display: flex;
-  /* 날짜와 제목을 가로로 정렬 (필요하면 추가) */
   flex-direction: column;
-  /* 세로 정렬 */
   width: fit-content;
   margin-bottom: 40px;
-  /* 각 섹션 아래에 여백 */
   border-radius: 5px;
   cursor: pointer;
   z-index: 2;
@@ -234,23 +203,21 @@
   background-color: #e8e8e8;
 }
 
+/* 검색시간 */
 .chat-time {
   font-size: 1rem;
   color: #aaa;
   font-family: 'jua';
   margin: 0;
-  /* 여백을 완전히 제거 */
   padding: 0;
-  /* 패딩도 제거 */
 }
 
+/* 첫 채팅 */
 .chat-title {
   font-size: 1.2rem;
   font-family: 'jua';
   color:#333;
   margin: 0;
-  /* 여백을 완전히 제거 */
   padding: 0;
-  /* 패딩도 제거 */
 
 }
