@@ -30,7 +30,7 @@ function App() {
         <Route path="/quizPage" element={<QuizPage />} />
 
         {/* 로그인된 사용자만 접근 가능한 페이지 */}
-        <Route path="/myPage" element={currentUser ? <MyPage /> : <Navigate to="/loginPage" />} />
+        <Route path="/myPage" element={<MyPage />} />
       </Routes>
     </Router>
   );

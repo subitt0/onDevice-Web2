@@ -116,8 +116,8 @@ function RegisterPage() {
           <a href="/main">ROBOBUDDY</a>
         </div>
         <div className="header-links">
-          <a href="/info">Info</a>
-          <a href="/quiz">Quiz</a>
+          <a href="/infoPage">Info</a>
+          <a href="/quizPage">Quiz</a>
         </div>
       </div>
 

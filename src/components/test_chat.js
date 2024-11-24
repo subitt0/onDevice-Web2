@@ -52,7 +52,7 @@ function Main() {
                 </div>
                 <div className="header-links">
                     <a href="/infoPage">Info</a>
-                    <a href="/quiz">Quiz</a>
+                    <a href="/quizPage">Quiz</a>
                 </div>
             </div>
 

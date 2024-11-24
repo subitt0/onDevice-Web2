@@ -13,22 +13,23 @@
   
   .modal-content {
     background-color: white;
-    padding: 20px;
+    padding: 30px 100px;
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
   }
   
-  button {
+  .modal-button {
     margin-top: 10px;
-    padding: 5px 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
     background-color: #F1DCB7;
     color: white;
     border: none;
     cursor: pointer;
   }
   
-  button:hover {
-    background-color: #F1DCB7;
+  .modal-button:hover {
+    background-color: #edd4a8;
   }
   

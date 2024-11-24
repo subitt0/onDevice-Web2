@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase'; // firebase.js에서 db 가져오기
+import { doc, getDoc } from 'firebase/firestore';
 
 import { Link } from 'react-router-dom';  // 'Link' import 추가
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +13,8 @@ import { useModal } from '../hooks/useModal';
 import '../styles/Basic.css'
 import '../styles/MyPage.css'
 
+import default_image from '../assets/images/myPage_dog.png'
+
 
 function MyPage() {
     const { currentUser, isAuthReady, logout } = useAuth();
@@ -21,35 +23,17 @@ function MyPage() {
     const navigate = useNavigate();
     const auth = getAuth(); // Firebase auth 객체 가져오기
     const { modalMessage, isModalOpen, openModal, closeModal } = useModal();
-    const [image, setImage] = useState(null); // 업로드된 이미지를 저장할 state
-
-    // 이미지 업로드 핸들러
-    const handleImageUpload = (e) => {
-        const file = e.target.files[0]; // 업로드된 파일을 가져옴
-        if (file) {
-            const reader = new FileReader(); // FileReader를 이용해 파일을 읽어들임
-            reader.onloadend = () => {
-                setImage(reader.result); // 파일을 읽은 후 결과를 state에 저장
-            };
-            reader.readAsDataURL(file); // 파일을 Data URL로 읽음 (이미지 미리보기용)
-        }
-    }
+    const defaultImage = default_image; // 기본 이미지 URL
+    const [image, setImage] = useState(defaultImage);
 
 
-    const handleLogout = async () => {
-        try {
-            logout();
-            navigate("/main");
-            openModal('로그아웃 성공! 홈화면으로 돌아갑니다.');
-            setTimeout(() => {
-                navigate('/Main');
-            }, 2000); // 모달이 열린 후 2초 후 로그인 페이지로 이동
-        } catch (error) {
-            openModal('로그아웃 실패:', error.message);
-        }
-    };
-
+    // 페이지 로드 시 로컬 스토리지에서 이미지 가져오기
     useEffect(() => {
+        const savedImage = localStorage.getItem('${userData.email}_uploadedImage');
+        if (savedImage) {
+            setImage(savedImage);
+        }
+
         const fetchUserData = async () => {
             const user = auth.currentUser; // 현재 로그인된 사용자
             if (user) {
@@ -75,9 +59,35 @@ function MyPage() {
         fetchUserData();
     }, [auth, navigate]);
 
-    if (error) {
-        return <div className="error-message">{error}</div>;
-    }
+
+    // 파일 선택 시 이미지 변경
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const base64Image = reader.result;
+                setImage(base64Image);
+                localStorage.setItem('${userData.email}_uploadedImage', base64Image); // 로컬 스토리지에 저장
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+
+    const handleLogout = async () => {
+        try {
+            logout();
+            navigate("/main");
+            openModal('로그아웃 성공! 홈화면으로 돌아갑니다.');
+            setTimeout(() => {
+                navigate('/Main');
+            }, 2000); // 모달이 열린 후 2초 후 로그인 페이지로 이동
+        } catch (error) {
+            openModal('로그아웃 실패:', error.message);
+        }
+    };
+
 
     return (
         <div className="mypage">
@@ -90,23 +100,35 @@ function MyPage() {
                 </div>
                 <div className="header-links">
                     <a href="/infoPage">Info</a>
-                    <a href="/quiz">Quiz</a>
+                    <a href="/quizPage">Quiz</a>
                 </div>
             </div>
             {/* 마이페이지 */}
             {userData ? (
                 <div className="mypage-content">
-                    <div>
-                        <input className="upload-button" type="file" onChange={handleImageUpload} /> {/* 파일 입력 */}
-
-                        {/* 이미지 미리보기 */}
-                        {image && <img className="image-icon" src={image} alt="Uploaded Preview" />}
+                    <img
+                        className="image-icon"
+                        src={image}
+                        alt="Uploaded"
+                    />
+                    <div className="file-upload">
+                    <button className="custom-file-upload" onClick={() => document.getElementById('file-upload').click()}>
+                        파일 선택
+                    </button>
+                    <input 
+                    className="file" 
+                    id="file-upload" 
+                    type="file" 
+                    accept="image/*" 
+                    onChange={handleImageChange} />
                     </div>
-                    <p>{userData.petInfo.petGender === "여자" ? "♀" : userData.petInfo.petGender === "남자" ? "♂" : ""}</p>
-                    <p>{userData.petInfo.petName}</p>
-                    <p>{userData.petInfo.petAge}</p>
-                    
-                    <p className="special note">특이사항: {userData.petInfo.specialNotes}</p>
+                    <div className="container">
+                        <p className="name">{userData.petInfo.petName} /</p>
+                        <p className="gender">{userData.petInfo.petGender}</p>
+                    </div>
+
+                    <p className="age">{userData.petInfo.petAge} 살</p>
+                    <p className="special-note">특이사항: {userData.petInfo.specialNotes}</p>
 
                     <button className="logout-button" onClick={handleLogout}>Log-out</button>
                 </div>
