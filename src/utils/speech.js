@@ -25,10 +25,14 @@ export const startSpeechRecognition = (onResult, onError) => {
   };
 
   export const speakText = (text) => {
-    const synth = window.speechSynthesis;
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'ko-KR'; // 한국어 설정
-    synth.speak(utterance);
+    // const synth = window.speechSynthesis;
+    // const utterance = new SpeechSynthesisUtterance(text);
+    // utterance.lang = 'ko-KR'; // 한국어 설정
+    // synth.speak(utterance);
+    const audio = new Audio('http://localhost:5000/response.mp3'); // Flask 서버의 URL로 수정
+    audio.play().catch((error) => {
+        console.error('Audio playback error:', error);
+    });
   };
   
   
